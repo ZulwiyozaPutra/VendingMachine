@@ -24,6 +24,29 @@ protocol VendingMachineType {
     func deposit(amount: Double)
 }
 
+//Error Types
+
+enum InventoryError {
+    case InvalidResource
+    case ConversionError
+}
+
+//Helper Classes
+
+class PlistConverter {
+    class func dictionaryFromFile(resource: String, ofType type: String) throws -> [String: AnyObject] {
+        guard let path = NSBundle.mainBundle().pathForResource(resource, ofType: type) else {
+            throw InventoryError.InvalidResource
+        }
+        guard let dictionary = NSDictionary(contentsOfFile: path) else {
+            throw InventoryError.ConversionError
+           
+            
+        }
+        
+    }
+}
+
 //ConcreteTypes
 
 enum VendingSelection {
