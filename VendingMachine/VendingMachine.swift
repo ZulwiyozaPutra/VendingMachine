@@ -26,7 +26,7 @@ protocol VendingMachineType {
 
 //Error Types
 
-enum InventoryError {
+enum InventoryError: ErrorType {
     case InvalidResource
     case ConversionError
 }
@@ -38,12 +38,11 @@ class PlistConverter {
         guard let path = NSBundle.mainBundle().pathForResource(resource, ofType: type) else {
             throw InventoryError.InvalidResource
         }
-        guard let dictionary = NSDictionary(contentsOfFile: path) else {
+        guard let dictionary = NSDictionary(contentsOfFile: path),
+        let castDictionary = dictionary as? [String: AnyObject] else {
             throw InventoryError.ConversionError
-           
-            
         }
-        
+        return castDictionary
     }
 }
 
