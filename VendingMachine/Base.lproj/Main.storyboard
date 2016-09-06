@@ -149,6 +149,9 @@
                                         </constraints>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal" title="Purchase"/>
+                                        <connections>
+                                            <action selector="purchase" destination="BYZ-38-t0r" eventType="touchUpInside" id="eDF-DM-Z2E"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>

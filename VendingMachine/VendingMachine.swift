@@ -20,9 +20,10 @@ protocol VendingMachineType {
     var selection: [VendingSelection] { get }
     var inventory: [VendingSelection: ItemType] { get set}
     var amountDeposited: Double { get set }
-    init(inventory: [VendingSelection: ItemType])
+    init(inventory : [VendingSelection: ItemType])
     func vend(selection: VendingSelection, quantity: Double) throws
     func deposit(amount: Double)
+    func itemForCurrentSelection(selection: VendingSelection) -> ItemType?
 }
 
 //Error Types
@@ -31,6 +32,12 @@ enum InventoryError: ErrorType {
     case InvalidResource
     case ConversionError
     case InvalidKey
+}
+
+enum VendingMachineError: ErrorType {
+    case InvalidSelection
+    case OutOfStock
+    case InsufficientFunds(required: Double)
 }
 
 //Helper Classes
@@ -118,7 +125,25 @@ class VendingMachine: VendingMachineType {
     }
     func vend(selection: VendingSelection, quantity: Double) throws {
         //add code
+        guard var item = inventory[selection] else {
+            throw VendingMachineError.InvalidSelection
+        }
+        guard item.quantity > 0 else {
+            throw VendingMachineError.OutOfStock
+        }
+        item.quantity = item.quantity - quantity
+        let totalPrice = item.price * quantity
+        if amountDeposited >= totalPrice {
+            amountDeposited = amountDeposited - totalPrice
+        } else {
+            let amountRequired = totalPrice - amountDeposited
+            throw VendingMachineError.InsufficientFunds(required: amountRequired)
+        }
     }
+    func itemForCurrentSelection(selection: VendingSelection) -> ItemType? {
+        return inventory[selection]
+    }
+    
     func deposit(amount: Double) {
         //add code
     }
