@@ -38,12 +38,17 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         // Do any additional setup after loading the view, typically from a nib.
         setupCollectionViewCells()
         print(vendingMachine.inventory)
-        balanceLabel.text = "$\(vendingMachine.amountDeposited)"
+        setupView()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func setupView() {
+        updateQuantityLabel()
+        updateBalanceLabel()
     }
     
     // MARK: - UICollectionView 
@@ -101,7 +106,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         if let currentSelection = currentSelection {
             do {
                 try vendingMachine.vend(currentSelection, quantity: quantity)
-                balanceLabel.text = "$\(vendingMachine.amountDeposited)"
+                updateBalanceLabel()
                 
             } catch {
                 //FIXME: Error Handling Catch Code
@@ -115,6 +120,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         print(sender.value)
         quantity = sender.value
         updateTotalPriceLabel()
+        updateQuantityLabel()
     }
     
     func updateTotalPriceLabel() {
@@ -122,6 +128,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             let item = vendingMachine.itemForCurrentSelection(currentSelection) {
             totalLabel.text = "$\(item.price * quantity)"
         }
+    }
+    
+    func updateQuantityLabel() {
+        quantityLabel.text = "\(quantity)"
+    }
+    
+    func updateBalanceLabel() {
+        balanceLabel.text = "$\(vendingMachine.amountDeposited)"
     }
 }
 
