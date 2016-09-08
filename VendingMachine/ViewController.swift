@@ -106,6 +106,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             do {
                 try vendingMachine.vend(currentSelection, quantity: quantity)
                 balanceLabel.text = "$\(vendingMachine.amountDeposited)"
+                
             } catch {
                 //FIXME: Error Handling Catch Code
             }
