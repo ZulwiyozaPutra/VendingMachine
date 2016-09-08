@@ -143,5 +143,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         updateQuantityLabel()
         updateTotalPriceLabel()
     }
+    
+    func showAlert() {
+        let alertController = UIAlertController(title: "Out of Stock", message: "We are sorry, the item you looking for is out of stock", preferredStyle: UIAlertControllerStyle.Alert)
+    }
 }
 
