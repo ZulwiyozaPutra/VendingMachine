@@ -26,6 +26,7 @@ protocol VendingMachineType {
     func itemForCurrentSelection(selection: VendingSelection) -> ItemType?
 }
 
+
 //Error Types
 
 enum InventoryError: ErrorType {
