@@ -115,5 +115,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
     }
     
+    @IBAction func updateQuantity(sender: UIStepper) {
+        print(sender.value)
+    }
+    
+    
 }
 
