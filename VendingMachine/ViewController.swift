@@ -80,6 +80,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         updateCellBackgroundColor(indexPath, selected: true)
         currentSelection = vendingMachine.selection[indexPath.row]
         updateTotalPriceLabel()
+        reset()
     }
     
     func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
@@ -131,11 +132,16 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
     func updateQuantityLabel() {
-        quantityLabel.text = "\(quantity)"
+        quantityLabel.text = "\(Int(quantity))"
     }
     
     func updateBalanceLabel() {
         balanceLabel.text = "$\(vendingMachine.amountDeposited)"
+    }
+    func reset() {
+        quantity = 1
+        updateQuantityLabel()
+        updateTotalPriceLabel()
     }
 }
 
