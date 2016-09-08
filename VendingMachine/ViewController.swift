@@ -74,11 +74,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         updateCellBackgroundColor(indexPath, selected: true)
         currentSelection = vendingMachine.selection[indexPath.row]
-        if let currentSelection = currentSelection,
-            let item = vendingMachine.itemForCurrentSelection(currentSelection) {
-            totalLabel.text = "$\(item.price)"
-            
-        }
+        updateTotalPriceLabel()
     }
     
     func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
@@ -117,8 +113,15 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     @IBAction func updateQuantity(sender: UIStepper) {
         print(sender.value)
+        quantity = sender.value
+        updateTotalPriceLabel()
     }
     
-    
+    func updateTotalPriceLabel() {
+        if let currentSelection = currentSelection,
+            let item = vendingMachine.itemForCurrentSelection(currentSelection) {
+            totalLabel.text = "$\(item.price * quantity)"
+        }
+    }
 }
 
