@@ -128,7 +128,7 @@ class VendingMachine: VendingMachineType {
         guard var item = inventory[selection] else {
             throw VendingMachineError.InvalidSelection
         }
-        guard item.quantity > 0 else {
+        guard item.quantity > quantity else {
             throw VendingMachineError.OutOfStock
         }
         item.quantity = item.quantity - quantity
