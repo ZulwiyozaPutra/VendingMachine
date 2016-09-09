@@ -53,7 +53,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     // MARK: - UICollectionView 
 
-    func setupCollectionViewCells() {
+    func setupCollectionViewCells() -> Void {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: 10, right: 0)
         let padding: CGFloat = 10
@@ -76,26 +76,26 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) -> Void {
         updateCellBackgroundColor(indexPath, selected: true)
         currentSelection = vendingMachine.selection[indexPath.row]
         updateTotalPriceLabel()
         reset()
     }
     
-    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) -> Void {
         updateCellBackgroundColor(indexPath, selected: false)
     }
     
-    func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) -> Void {
         updateCellBackgroundColor(indexPath, selected: true)
     }
     
-    func collectionView(collectionView: UICollectionView, didUnhighlightItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(collectionView: UICollectionView, didUnhighlightItemAtIndexPath indexPath: NSIndexPath) -> Void {
         updateCellBackgroundColor(indexPath, selected: false)
     }
     
-    func updateCellBackgroundColor(indexPath: NSIndexPath, selected: Bool) {
+    func updateCellBackgroundColor(indexPath: NSIndexPath, selected: Bool) -> Void {
         if let cell = collectionView.cellForItemAtIndexPath(indexPath) {
             cell.contentView.backgroundColor = selected ? UIColor(red: 41/255.0, green: 211/255.0, blue: 241/255.0, alpha: 1.0) : UIColor.clearColor()
         }
@@ -103,7 +103,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     // MARK: - Helper Methods
     
-    @IBAction func purchase() {
+    @IBAction func purchase() -> Void {
         if let currentSelection = currentSelection {
             do {
                 try vendingMachine.vend(currentSelection, quantity: quantity)
@@ -117,32 +117,37 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             //FIXME: Alert User to no selection
         }
     }
-    @IBAction func updateQuantity(sender: UIStepper) {
+    @IBAction func updateQuantity(sender: UIStepper) -> Void {
         print(sender.value)
         quantity = sender.value
         updateTotalPriceLabel()
         updateQuantityLabel()
     }
-    func updateTotalPriceLabel() {
+    func updateTotalPriceLabel() -> Void {
         if let currentSelection = currentSelection,
             let item = vendingMachine.itemForCurrentSelection(currentSelection) {
             totalLabel.text = "$\(item.price * quantity)"
         }
     }
-    func updateQuantityLabel() {
+    func updateQuantityLabel() -> Void {
         quantityLabel.text = "\(Int(quantity))"
     }
-    func updateBalanceLabel() {
+    func updateBalanceLabel() -> Void {
         balanceLabel.text = "$\(vendingMachine.amountDeposited)"
     }
-    func reset() {
+    func reset() -> Void {
         quantity = 1
         updateQuantityLabel()
         updateTotalPriceLabel()
     }
-    func showAlert() {
+    func showAlert() -> Void {
         let alertController = UIAlertController(title: "Out of Stock", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
         presentViewController(alertController, animated: true, completion: nil)
+        let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: dismissAlert)
+        alertController.addAction(okAction)
     }
+    func dismissAlert(sender: UIAlertAction) -> Void {
+    }
+    
 }
 
