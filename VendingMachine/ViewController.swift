@@ -141,12 +141,13 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         updateTotalPriceLabel()
     }
     func showAlert() -> Void {
-        let alertController = UIAlertController(title: "Out of Stock", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+        let alertController = UIAlertController(title: "Out of Stock", message: "We are sorry the item you want is out of stock", preferredStyle: UIAlertControllerStyle.Alert)
         presentViewController(alertController, animated: true, completion: nil)
         let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: dismissAlert)
         alertController.addAction(okAction)
     }
     func dismissAlert(sender: UIAlertAction) -> Void {
+        reset()
     }
     
 }
