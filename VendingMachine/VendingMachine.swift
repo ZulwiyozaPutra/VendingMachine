@@ -42,6 +42,7 @@ enum VendingMachineError: ErrorType {
 }
 
 
+
 //Helper Classes
 
 class PlistConverter {
