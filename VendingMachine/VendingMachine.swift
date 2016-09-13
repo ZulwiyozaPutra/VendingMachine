@@ -34,6 +34,7 @@ enum InventoryError: ErrorType {
     case InvalidKey
 }
 
+
 enum VendingMachineError: ErrorType {
     case InvalidSelection(title: "Invalid Selection", message: "You need to select item before purchase an item")
     case OutOfStock
