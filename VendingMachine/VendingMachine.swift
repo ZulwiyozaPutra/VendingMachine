@@ -40,7 +40,6 @@ enum VendingMachineError: ErrorType {
     case InsufficientFunds(required: Double)
 }
 
-
 //Helper Classes
 
 class PlistConverter {
