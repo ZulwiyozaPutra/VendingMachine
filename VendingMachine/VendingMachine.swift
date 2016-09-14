@@ -17,6 +17,7 @@ protocol ItemType {
 }
 
 
+
 protocol VendingMachineType {
     var selection: [VendingSelection] { get }
     var inventory: [VendingSelection: ItemType] { get set}
