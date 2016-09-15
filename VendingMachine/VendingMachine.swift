@@ -16,6 +16,15 @@ protocol ItemType {
     var quantity: Double { get set }
 }
 
+protocol VendingMachineType {
+    var selection: [VendingSelection] { get }
+    var inventory: [VendingSelection: ItemType] { get set}
+    var amountDeposited: Double { get set }
+    init(inventory : [VendingSelection: ItemType])
+    func vend(selection: VendingSelection, quantity: Double) throws
+    func deposit(amount: Double)
+    func itemForCurrentSelection(selection: VendingSelection) -> ItemType?
+}
 
 //Error Types
 
