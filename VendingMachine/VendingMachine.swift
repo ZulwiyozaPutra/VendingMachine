@@ -28,6 +28,10 @@ protocol VendingMachineType {
 
 //Error Types
 
+enum InventoryError: ErrorType {
+    case InvalidResource
+    case ConversionError
+    case InvalidKey
 }
 
 enum VendingMachineError: ErrorType {
