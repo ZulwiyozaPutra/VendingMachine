@@ -28,14 +28,14 @@ protocol VendingMachineType {
 
 //Error Types
 
-enum InventoryError: ErrorType {
+enum InventoryError: Error {
     case InvalidResource
     case ConversionError
     case InvalidKey
 }
 
-enum VendingMachineError: ErrorType {
-    case InvalidSelection(title: "Invalid Selection", message: "You need to select item before purchase an item")
+enum VendingMachineError: Error {
+    case InvalidSelection
     case OutOfStock
     case InsufficientFunds(required: Double)
 }
@@ -45,7 +45,7 @@ enum VendingMachineError: ErrorType {
 
 class PlistConverter {
     class func dictionaryFromFile(resource: String, ofType type: String) throws -> [String: AnyObject] {
-        guard let path = NSBundle.mainBundle().pathForResource(resource, ofType: type) else {
+        guard let path = Bundle.main.path(forResource: resource, ofType: type) else {
             throw InventoryError.InvalidResource
         }
         guard let dictionary = NSDictionary(contentsOfFile: path),
