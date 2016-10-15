@@ -64,7 +64,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         collectionView.collectionViewLayout = layout
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return vendingMachine.selection.count
     }
     
@@ -76,23 +76,23 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) -> Void {
-        updateCellBackgroundColor(indexPath: indexPath, selected: true)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) -> Void {
+        updateCellBackgroundColor(indexPath: indexPath as NSIndexPath, selected: true)
         currentSelection = vendingMachine.selection[indexPath.row]
         updateTotalPriceLabel()
         reset()
     }
     
-    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) -> Void {
-        updateCellBackgroundColor(indexPath: indexPath, selected: false)
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) -> Void {
+        updateCellBackgroundColor(indexPath: indexPath as NSIndexPath, selected: false)
     }
     
-    func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) -> Void {
-        updateCellBackgroundColor(indexPath: indexPath, selected: true)
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) -> Void {
+        updateCellBackgroundColor(indexPath: indexPath as NSIndexPath, selected: true)
     }
     
-    func collectionView(collectionView: UICollectionView, didUnhighlightItemAtIndexPath indexPath: NSIndexPath) -> Void {
-        updateCellBackgroundColor(indexPath: indexPath, selected: false)
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) -> Void {
+        updateCellBackgroundColor(indexPath: indexPath as NSIndexPath, selected: false)
     }
     
     func updateCellBackgroundColor(indexPath: NSIndexPath, selected: Bool) -> Void {
